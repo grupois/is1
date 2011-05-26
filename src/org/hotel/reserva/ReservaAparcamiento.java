@@ -1,29 +1,37 @@
 package org.hotel.reserva;
 
-public class ReservaAparcamiento implements Reserva {
+import org.hotel.cliente.Cliente;
+import org.hotel.servicio.Aparcamiento;
+import org.hotel.servicio.Servicio;
+
+public class ReservaAparcamiento extends Reserva {
+
+	public ReservaAparcamiento(int inicioDia, int inicioMes, int inicioAno,
+			int finDia, int finMes, int finAno, Cliente cliente) {
+		super(inicioDia, inicioMes, inicioAno, finDia, finMes, finAno, cliente);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public int reservar() {
-		// TODO Auto-generated method stub
-		return 0;
+		this.servicioAsociado = new Aparcamiento();
 	}
 
 	@Override
 	public int cancelar() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public String getServicio() {
-		// TODO Auto-generated method stub
+	public Servicio getServicio() {
 		return null;
 	}
 
 	@Override
 	public double getPrecio() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
+	
 }
