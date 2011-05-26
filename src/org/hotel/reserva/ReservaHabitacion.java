@@ -1,28 +1,26 @@
 package org.hotel.reserva;
 
-public class ReservaHabitacion implements Reserva {
+import org.hotel.cliente.Cliente;
+
+public class ReservaHabitacion extends Reserva {
+
+	public ReservaHabitacion(int inicioDia, int inicioMes, int inicioAno,
+			int finDia, int finMes, int finAno, Cliente cliente) {
+		super(inicioDia, inicioMes, inicioAno, finDia, finMes, finAno, cliente);
+	}
 
 	@Override
 	public int reservar() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public int cancelar() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public String getServicio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public double getPrecio() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

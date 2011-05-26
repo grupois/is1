@@ -15,6 +15,7 @@ public class ReservaAparcamiento extends Reserva {
 	@Override
 	public int reservar() {
 		this.servicioAsociado = new Aparcamiento();
+		return 0;
 	}
 
 	@Override

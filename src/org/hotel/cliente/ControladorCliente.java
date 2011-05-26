@@ -1,7 +1,16 @@
 package org.hotel.cliente;
 
-import org.hotel.VC.Controlador;
+public class ControladorCliente{
 
-public class ControladorCliente implements Controlador{
+	public void actualizarClientes(VistaCliente vista,Cliente[] clientes) {
+		vista.displayClientes(clientes);
+	}
+	
+	public void insertarCliente() {
 
+	}
+	
+	public void eliminarCliente() {
+		
+	}
 }
