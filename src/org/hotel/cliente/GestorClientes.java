@@ -31,7 +31,6 @@ public class GestorClientes { //singleton
 	public Cliente anadirCliente(String nom, String apell, String dni, String nacionalidad,
 			String correo, String ruta_foto) {
 		Cliente res = new Cliente(numCl++, nom, apell, dni, nacionalidad, correo, ruta_foto);
-		System.out.println(numCl);
 		listaClientes.add(res);
 		return res;
 	}

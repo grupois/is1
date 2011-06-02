@@ -1,5 +1,9 @@
 package org.hotel.cliente;
 
+import java.util.ArrayList;
+
+import org.hotel.reserva.Reserva;
+
 public class Cliente {
 
 	private int numeroCliente;
@@ -12,8 +16,16 @@ public class Cliente {
 	private VistaCliente vista;
 	private ControladorCliente controlador;
 	private int establecido=0;
+	private ArrayList<Reserva> listaReservas;
+	private static int numReserva=0;
 	
+	public int darNumeroReserva(){
+		return numReserva++;
+	}
 	
+	public ArrayList<Reserva> getListaReservas() {
+		return listaReservas;
+	}
 	public void setEstablecido(int establecido) {
 		this.establecido = establecido;
 	}
@@ -82,8 +94,9 @@ public class Cliente {
 	public Cliente(int numCliente){
 		super();
 		this.numeroCliente=numCliente;
+		this.listaReservas=new ArrayList<Reserva>();
 		this.controlador=new ControladorCliente(this);
-		this.vista=new VistaCliente(this.controlador);
+		this.vista=new VistaCliente(this,this.controlador);
 	}
 
 	public Cliente(int numeroCliente, String nombre, String apellidos,
@@ -96,8 +109,9 @@ public class Cliente {
 		this.nacionalidad = nacionalidad;
 		this.correo = correo;
 		this.ruta_foto = ruta_foto;
+		this.listaReservas=new ArrayList<Reserva>();
 		this.controlador=new ControladorCliente(this);
-		this.vista=new VistaCliente(this.controlador);
+		this.vista=new VistaCliente(this,this.controlador);
 	}
 	
 	@Override

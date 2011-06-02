@@ -1,5 +1,7 @@
 package org.hotel.cliente;
 
+import org.hotel.reserva.Reserva;
+
 public class ControladorCliente {
 	
 	private Cliente client;
@@ -20,6 +22,16 @@ public class ControladorCliente {
 		if(this.client.getEstablecido()==0)
 			GestorClientes.getInstance().eliminarCliente(this.client.getNumeroCliente());
 		return this.client;
+	}
+	
+	public void anadirReserva(Reserva res) {
+		
+		Reserva reserva=new Reserva(Integer.decode(this.client.getNumeroCliente()+""+this.client.darNumeroReserva()), this.client);
+		this.client.getListaReservas().add(res);
+	}
+	
+	public void borrarReserva(Reserva res){
+		this.client.getListaReservas().remove(res);
 	}
 
 }

@@ -1,27 +1,28 @@
-package org.hotel.cliente;
+package org.hotel.reserva;
 
 import java.awt.Color;
 import java.awt.Component;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-public class VistaListaClientes extends JList{
+public class VistaListaReservas extends JList{
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-
-	public VistaListaClientes() {
+	
+	public VistaListaReservas() {
 		this.setCellRenderer(new item());
 	}
 
-	public void displayClientes(Object[] clientes) {
-		this.setListData(clientes);
+	public void displayReservas(Object[] reservas) {
+		this.setListData(reservas);
 	}
+
+	
 
 	class item extends JLabel implements ListCellRenderer{
 
@@ -39,16 +40,8 @@ public class VistaListaClientes extends JList{
 		@Override
 		public Component getListCellRendererComponent(JList list, Object value,
 				int index, boolean isSelected, boolean cellHasFocus) {
-			Cliente client=(Cliente) value;
-			String ruta=client.getRuta_foto().equals("Selecc. Foto")? "unknown.png" : client.getRuta_foto();
-			ImageIcon ss=new ImageIcon(ruta);
-			ss.setImage(ss.getImage().getScaledInstance(30, 30, VERTICAL_WRAP));
-			setIconTextGap(1);
-			setIcon(ss);
-			if(client.getApellidos()!=null)
-				setText("\t\t\t\t\t\t\t\t"+client.getNumeroCliente()+"\t\t\t\t\t\t\t\t"+client.getApellidos()+", "+client.getNombre());
-
-			//add(new JLabel(client.getNombre()),);
+			Reserva res=(Reserva) value;
+			setText(res.toString());
 			if (isSelected) {
 				setBackground(Color.gray);
 				setForeground(Color.white);
@@ -60,4 +53,5 @@ public class VistaListaClientes extends JList{
 		}
 
 	}
+
 }
