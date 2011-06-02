@@ -11,7 +11,15 @@ public class Cliente {
 	private String ruta_foto;
 	private VistaCliente vista;
 	private ControladorCliente controlador;
+	private int establecido=0;
 	
+	
+	public void setEstablecido(int establecido) {
+		this.establecido = establecido;
+	}
+	public int getEstablecido() {
+		return establecido;
+	}
 	public VistaCliente getVista() {
 		return vista;
 	}

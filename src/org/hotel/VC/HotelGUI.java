@@ -21,6 +21,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseListener;
 
 public class HotelGUI extends JFrame {
 
@@ -75,6 +76,28 @@ public class HotelGUI extends JFrame {
 		panelClientes.add(scrollPane);
 
 		final VistaListaClientes list = new VistaListaClientes();
+		list.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+		            Cliente client=(Cliente) list.getSelectedValue();
+		            client.getVista().setVisible(true);
+		         }
+			}
+		});
 		list.setVisibleRowCount(4);
 		scrollPane.setColumnHeaderView(list);
 		final ControladorListaClientes contClient= new ControladorListaClientes();
@@ -85,6 +108,8 @@ public class HotelGUI extends JFrame {
 		btnAadirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Cliente client=GestorClientes.getInstance().anadirCliente();
+				client.getVista().setVistaClientes(list);
+				client.getVista().setControladorClientes(contClient);
 				client.getVista().setVisible(true);
 			}
 		});
@@ -103,16 +128,6 @@ public class HotelGUI extends JFrame {
 		});
 		btnEliminarCliente.setBounds(222, 199, 146, 25);
 		panelClientes.add(btnEliminarCliente);
-		
-		JButton button = new JButton("");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				contClient.actualizarClientes(list);
-			}
-		});
-		button.setBounds(0, 188, 41, 38);
-		panelClientes.add(button);
-		button.setIcon(new ImageIcon("refresh.png"));
 
 
 		JPanel panelInstalaciones = new JPanel();

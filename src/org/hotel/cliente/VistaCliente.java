@@ -28,6 +28,17 @@ public class VistaCliente extends JFrame {
 	private JTextField textField_4;
 	private ControladorCliente controlador;
 	private VistaCliente yo=this;
+	private ControladorListaClientes controladorClientes;
+	private VistaListaClientes vistaClientes;
+
+	public void setControladorClientes(ControladorListaClientes controladorClientes) {
+		this.controladorClientes = controladorClientes;
+	}
+
+	public void setVistaClientes(VistaListaClientes vistaClientes) {
+		this.vistaClientes = vistaClientes;
+	}
+
 
 	/**
 	 * Launch the application.
@@ -155,6 +166,7 @@ public class VistaCliente extends JFrame {
 				textField_4.setText(clientecancelar.getCorreo());
 				btnSeleccFoto.setText(clientecancelar.getRuta_foto());
 				yo.setVisible(false);
+			    controladorClientes.actualizarClientes(vistaClientes);
 			}
 		});
 		btnCancelar.setBounds(292, 186, 117, 29);
@@ -166,7 +178,9 @@ public class VistaCliente extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				controlador.aceptar(textField.getText(), textField_1.getText(), textField_2.getText(), textField_3.getText(),
 						textField_4.getText(), btnSeleccFoto.getText());
+				
 				yo.setVisible(false);
+			    controladorClientes.actualizarClientes(vistaClientes);
 			}
 		});
 		btnAceptar.setBounds(292, 137, 117, 29);

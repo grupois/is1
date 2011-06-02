@@ -14,9 +14,12 @@ public class ControladorCliente {
 		this.client.setNacionalidad(nacionalidad);
 		this.client.setCorreo(correo);
 		this.client.setRuta_foto(ruta_foto);
+		this.client.setEstablecido(1);
 	}
 	public Cliente cancelar(){
-		return client;
+		if(this.client.getEstablecido()==0)
+			GestorClientes.getInstance().eliminarCliente(this.client.getNumeroCliente());
+		return this.client;
 	}
 
 }
