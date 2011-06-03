@@ -13,6 +13,7 @@ public class Reserva {
 	private int finMes;
 	private int finAno;
 	
+	private int establecido=0;
 	private int numReserva;
 	private String localizacion;
 	private Cliente cliente;
@@ -20,6 +21,7 @@ public class Reserva {
 	
 	private VistaReserva vistaRes;
 	private ControladorReserva controladorRes;
+	private ControladorListaReservas contListRes; 
 	
 	public int reservar() {
 		return 0;
@@ -31,6 +33,42 @@ public class Reserva {
 		return 0;
 	}
 	
+	public void setFechaInicio(int diaInicio,int mesInicio,int anoInicio) {
+		this.inicioDia = diaInicio;
+		this.inicioMes = mesInicio;
+		this.inicioAno = anoInicio;
+	}
+	
+	public void setFechaFin(int diaFin,int mesFin,int anoFin) {
+		this.finDia = diaFin;
+		this.finMes = mesFin;
+		this.finAno = anoFin;
+	}
+	
+	public void setEstablecido(int establecido){
+		this.establecido=establecido;
+	}
+	
+	public int getEstablecido(){
+		return this.establecido;
+	}
+
+	public void setLocalizacion(String localizacion) {
+		this.localizacion = localizacion;
+	}
+	public void setServicioAsociado(Servicio servicioAsociado) {
+		this.servicioAsociado = servicioAsociado;
+	}
+	
+	public VistaReserva getVistaReserva() {
+		return vistaRes;
+	}
+	public void setControladorListaReservas(ControladorListaReservas list) {
+		this.contListRes=list;
+	}
+	public ControladorListaReservas getControladorListaReservas() {
+		return this.contListRes;
+	}
 
 	public Servicio getServicio() {
 		return this.servicioAsociado;
@@ -39,8 +77,8 @@ public class Reserva {
 	public Reserva(int numReserva,Cliente cliente) {
 		this.numReserva=numReserva;
 		this.cliente = cliente;
-		this.vistaRes=new VistaReserva();
-		this.controladorRes=new ControladorReserva();
+		this.controladorRes=new ControladorReserva(this,cliente);
+		this.vistaRes=new VistaReserva(this.controladorRes,this);
 	}
 	
 	public Reserva(int inicioDia, int inicioMes, int inicioAno, int finDia,
@@ -53,10 +91,10 @@ public class Reserva {
 		this.finMes = finMes;
 		this.finAno = finAno;
 		this.cliente = cliente;
-		this.localizacion=localizacion;
-		this.numReserva=numReserva;
-		this.vistaRes=new VistaReserva();
-		this.controladorRes=new ControladorReserva();
+		this.localizacion = localizacion;
+		this.numReserva = numReserva;
+		this.vistaRes = new VistaReserva(this.controladorRes,this);
+		this.controladorRes = new ControladorReserva(this,cliente);
 	}
 	
 	public VistaReserva getVistaRes(){
@@ -93,6 +131,15 @@ public class Reserva {
 	
 	@Override
 	public String toString() {
-		return this.inicioDia+"/"+this.inicioMes+"/"+"/"+this.inicioAno+"\t - \t"+this.finDia+"/"+this.finMes+"/"+this.finAno+" \t\t\t "+this.numReserva;
+		String servicio=this.servicioAsociado==null? "Sin servicio":this.servicioAsociado.toString();
+		return this.numReserva+"  \t\t\t  "+this.inicioDia+"/"+this.inicioMes+"/"+this.inicioAno+"\t - \t"+this.finDia+"/"+this.finMes+"/"+this.finAno+
+			"  \t\t\t  "+servicio;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Reserva)) return false;
+		Reserva res=(Reserva) obj;
+		return res.getNumReserva()==this.numReserva;
 	}
 }

@@ -1,7 +1,7 @@
 package org.hotel.cliente;
 
-import java.util.ArrayList;
-
+import org.hotel.reserva.ControladorListaReservas;
+import org.hotel.reserva.GestorReservas;
 import org.hotel.reserva.Reserva;
 
 public class Cliente {
@@ -16,15 +16,15 @@ public class Cliente {
 	private VistaCliente vista;
 	private ControladorCliente controlador;
 	private int establecido=0;
-	private ArrayList<Reserva> listaReservas;
+	private GestorReservas gestorReservas;
 	private static int numReserva=0;
-	
+
 	public int darNumeroReserva(){
 		return numReserva++;
 	}
-	
-	public ArrayList<Reserva> getListaReservas() {
-		return listaReservas;
+
+	public GestorReservas getGestorReservas() {
+		return gestorReservas;
 	}
 	public void setEstablecido(int establecido) {
 		this.establecido = establecido;
@@ -81,12 +81,15 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public int realizar_reserva() {
-		return 0;
+	public Reserva realizar_reserva(ControladorListaReservas contListRes) {
+		Reserva res=this.gestorReservas.anadirReserva();
+		res.setControladorListaReservas(contListRes);
+		return res;
 	}
-	public int cancelar_reserva() {
-		return 0;
+	public void cancelar_reserva(Reserva res) {
+		this.gestorReservas.eliminarReserva(res);
 	}
+	
 	public int modificar_reserva() {
 		return 0;
 	}
@@ -94,7 +97,7 @@ public class Cliente {
 	public Cliente(int numCliente){
 		super();
 		this.numeroCliente=numCliente;
-		this.listaReservas=new ArrayList<Reserva>();
+		this.gestorReservas=new GestorReservas(this);
 		this.controlador=new ControladorCliente(this);
 		this.vista=new VistaCliente(this,this.controlador);
 	}
@@ -109,21 +112,17 @@ public class Cliente {
 		this.nacionalidad = nacionalidad;
 		this.correo = correo;
 		this.ruta_foto = ruta_foto;
-		this.listaReservas=new ArrayList<Reserva>();
+		this.gestorReservas=new GestorReservas(this);
 		this.controlador=new ControladorCliente(this);
 		this.vista=new VistaCliente(this,this.controlador);
 	}
-	
+
 	@Override
 	public boolean equals(Object arg0) {
 		if (!(arg0 instanceof Cliente))
 			return false;
 		Cliente aux = (Cliente) arg0;
-		if (aux.getNumeroCliente()==this.getNumeroCliente()) {
-			return true;
-		} else {
-			return false;
-		}
+		return aux.getNumeroCliente()==this.getNumeroCliente();
 	}
 
 }

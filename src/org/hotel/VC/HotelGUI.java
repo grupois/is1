@@ -97,8 +97,6 @@ public class HotelGUI extends JFrame {
 		list.setVisibleRowCount(4);
 		scrollPane.setColumnHeaderView(list);
 		final ControladorListaClientes contClient= new ControladorListaClientes();
-		//Cliente[] clientes=GestorClientes.getInstance().getArrayClientes();
-		//contClient.actualizarClientes(list, clientes);
 		
 		JButton btnAadirCliente = new JButton("A\u00F1adir Cliente");
 		btnAadirCliente.addActionListener(new ActionListener() {

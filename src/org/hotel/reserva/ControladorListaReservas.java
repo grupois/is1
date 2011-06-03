@@ -11,7 +11,7 @@ public class ControladorListaReservas {
 	}
 
 	public void actualizarClientes(VistaListaReservas vista) {
-		vista.displayReservas(client.getListaReservas().toArray());
+		vista.displayReservas(client.getGestorReservas().getArrayReservas());
 	}
 
 }

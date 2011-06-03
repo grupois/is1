@@ -3,6 +3,8 @@ package org.hotel.cliente;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
@@ -15,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
+import org.hotel.reserva.ControladorListaReservas;
 import org.hotel.reserva.Reserva;
 import org.hotel.reserva.VistaListaReservas;
 
@@ -30,11 +33,9 @@ public class VistaCliente extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
-	private ControladorCliente controlador;
 	private VistaCliente yo=this;
 	private ControladorListaClientes controladorClientes;
 	private VistaListaClientes vistaClientes;
-	private Cliente client;
 
 	public void setControladorClientes(ControladorListaClientes controladorClientes) {
 		this.controladorClientes = controladorClientes;
@@ -64,9 +65,7 @@ public class VistaCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VistaCliente(final Cliente client,final ControladorCliente cont) {
-		this.controlador=cont;
-		this.client=client;
+	public VistaCliente(final Cliente client,final ControladorCliente controlador) {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
 		setBounds(100, 100, 451, 528);
@@ -173,10 +172,36 @@ public class VistaCliente extends JFrame {
 		final VistaListaReservas list = new VistaListaReservas();
 		scrollPane.setColumnHeaderView(list);
 
+		list.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent e) {}
+
+			@Override
+			public void mousePressed(MouseEvent e) {}
+
+			@Override
+			public void mouseExited(MouseEvent e) {}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2) {
+					Reserva res=(Reserva) list.getSelectedValue();
+					res.getVistaReserva().setVisible(true);
+				}
+			}
+		});
+
+		final ControladorListaReservas contListRes = new ControladorListaReservas(client);
 		JButton btnAadirReserva = new JButton("Añadir Reserva");
 		btnAadirReserva.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Reserva res=new Reserva(Integer.decode(client.getNumeroCliente()+""+client.darNumeroReserva()), client);
+				Reserva res=client.realizar_reserva(contListRes);
+				res.getVistaReserva().setVistaListRes(list);
+				res.getVistaReserva().setContListRes(contListRes);
 				res.getVistaRes().setVisible(true);
 			}
 		});
@@ -189,6 +214,7 @@ public class VistaCliente extends JFrame {
 				Reserva res=(Reserva) list.getSelectedValue();
 				res.getVistaRes().dispose();
 				res.getCliente().getControlador().borrarReserva(res);
+				contListRes.actualizarClientes(list);
 			}
 		});
 		btnBorrarReserva.setBounds(221, 447, 141, 25);

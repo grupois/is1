@@ -24,14 +24,12 @@ public class ControladorCliente {
 		return this.client;
 	}
 	
-	public void anadirReserva(Reserva res) {
-		
-		Reserva reserva=new Reserva(Integer.decode(this.client.getNumeroCliente()+""+this.client.darNumeroReserva()), this.client);
-		this.client.getListaReservas().add(res);
+	public Reserva anadirReserva() {
+		return this.client.getGestorReservas().anadirReserva();
 	}
 	
-	public void borrarReserva(Reserva res){
-		this.client.getListaReservas().remove(res);
+	public boolean borrarReserva(Reserva res){
+		return this.client.getGestorReservas().eliminarReserva(res);
 	}
 
 }
