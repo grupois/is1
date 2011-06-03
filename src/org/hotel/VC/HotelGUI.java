@@ -18,6 +18,8 @@ import org.hotel.cliente.Cliente;
 import org.hotel.cliente.ControladorListaClientes;
 import org.hotel.cliente.GestorClientes;
 import org.hotel.cliente.VistaListaClientes;
+import java.awt.FlowLayout;
+import javax.swing.JList;
 
 public class HotelGUI extends JFrame {
 
@@ -54,50 +56,44 @@ public class HotelGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(0, 0, 444, 272);
-		contentPane.add(tabbedPane);
+		final ControladorListaClientes contClient= new ControladorListaClientes();
 
 		JPanel panelClientes=new JPanel();
-		tabbedPane.addTab("Clientes",panelClientes);
-
-		JPanel panelReservas = new JPanel();
-		tabbedPane.addTab("Reservas", null, panelReservas, null);
+		panelClientes.setBounds(0, 0, 439, 263);
+		contentPane.add(panelClientes);
 		panelClientes.setLayout(null);
 		panelClientes.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 423, 190);
+		scrollPane.setBounds(0, 0, 439, 212);
 		panelClientes.add(scrollPane);
 
 		final VistaListaClientes list = new VistaListaClientes();
 		list.addMouseListener(new MouseListener() {
-			
+
 			@Override
 			public void mouseReleased(MouseEvent e) {}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {}
-			
+
 			@Override
 			public void mouseExited(MouseEvent e) {}
-			
+
 			@Override
 			public void mouseEntered(MouseEvent e) {}
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
-		            Cliente client=(Cliente) list.getSelectedValue();
-		            client.getVista().setVisible(true);
-		         }
+					Cliente client=(Cliente) list.getSelectedValue();
+					client.getVista().setVisible(true);
+				}
 			}
 		});
 		list.setVisibleRowCount(4);
 		scrollPane.setColumnHeaderView(list);
-		final ControladorListaClientes contClient= new ControladorListaClientes();
-		
+
 		JButton btnAadirCliente = new JButton("A\u00F1adir Cliente");
 		btnAadirCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -107,10 +103,10 @@ public class HotelGUI extends JFrame {
 				client.getVista().setVisible(true);
 			}
 		});
-		
-		btnAadirCliente.setBounds(46, 199, 146, 25);
+
+		btnAadirCliente.setBounds(49, 226, 146, 25);
 		panelClientes.add(btnAadirCliente);
-		
+
 		JButton btnEliminarCliente = new JButton("Eliminar Cliente");
 		btnEliminarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -120,18 +116,12 @@ public class HotelGUI extends JFrame {
 				contClient.actualizarClientes(list);
 			}
 		});
-		btnEliminarCliente.setBounds(222, 199, 146, 25);
+		btnEliminarCliente.setBounds(226, 226, 146, 25);
 		panelClientes.add(btnEliminarCliente);
 
-
-		JPanel panelInstalaciones = new JPanel();
-		panelInstalaciones.setToolTipText("");
-		tabbedPane.addTab("Instalaciones", null, panelInstalaciones, null);
-		panelInstalaciones.setLayout(null);
-
 	}
-	
+
 	public void notificar() {
-		
+
 	}
 }

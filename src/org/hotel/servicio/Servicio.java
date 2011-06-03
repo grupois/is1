@@ -1,9 +1,8 @@
 package org.hotel.servicio;
 
-import java.util.ArrayList;
-
 public interface Servicio {
 	public String getServicio();
-	public int precioBase();
-	public ArrayList<String> caracteristicas();
+	public double precioBase();
+	public double precioDesc(int desc);
+	public void establecerModificadorPrecio(double mod);
 }

@@ -12,12 +12,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JButton;
 
+import org.hotel.servicio.GestorServicios;
 import org.hotel.servicio.Servicio;
+import org.hotel.servicio.VistaListaServicios;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.SwingConstants;
 
 public class VistaReserva extends JFrame {
 
@@ -111,7 +114,8 @@ public class VistaReserva extends JFrame {
 		scrollPane.setBounds(12, 91, 410, 114);
 		contentPane.add(scrollPane);
 		
-		final JList list = new JList();
+		final VistaListaServicios list = new VistaListaServicios();
+		list.displayReservas(GestorServicios.getInstance().getArrayServicios());
 		scrollPane.setColumnHeaderView(list);
 		
 		JButton btnAceptar = new JButton("Aceptar");
@@ -149,6 +153,11 @@ public class VistaReserva extends JFrame {
 		});
 		btnCancelar.setBounds(232, 217, 117, 25);
 		contentPane.add(btnCancelar);
+		
+		JLabel lblNewLabel_1 = new JLabel("0 €");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblNewLabel_1.setBounds(347, 66, 70, 15);
+		contentPane.add(lblNewLabel_1);
 		
 		addWindowListener(new WindowListener() {
 

@@ -13,6 +13,7 @@ public class Reserva {
 	private int finMes;
 	private int finAno;
 	
+	private double precio=0;
 	private int establecido=0;
 	private int numReserva;
 	private String localizacion;
@@ -23,14 +24,13 @@ public class Reserva {
 	private ControladorReserva controladorRes;
 	private ControladorListaReservas contListRes; 
 	
-	public int reservar() {
-		return 0;
+	public void establecerServicio(Servicio serv){
+		this.servicioAsociado=serv;
 	}
-	public int cancelar() {
-		return 0;
-	}
+	
+	
 	public double getPrecio() {
-		return 0;
+		return this.precio;
 	}
 	
 	public void setFechaInicio(int diaInicio,int mesInicio,int anoInicio) {
@@ -82,7 +82,7 @@ public class Reserva {
 	}
 	
 	public Reserva(int inicioDia, int inicioMes, int inicioAno, int finDia,
-			int finMes, int finAno, int numReserva, String localizacion, Cliente cliente) {
+			int finMes, int finAno, int numReserva, int precio, String localizacion, Cliente cliente) {
 		super();
 		this.inicioDia = inicioDia;
 		this.inicioMes = inicioMes;
@@ -93,6 +93,7 @@ public class Reserva {
 		this.cliente = cliente;
 		this.localizacion = localizacion;
 		this.numReserva = numReserva;
+		this.precio=precio;
 		this.vistaRes = new VistaReserva(this.controladorRes,this);
 		this.controladorRes = new ControladorReserva(this,cliente);
 	}
@@ -133,7 +134,7 @@ public class Reserva {
 	public String toString() {
 		String servicio=this.servicioAsociado==null? "Sin servicio":this.servicioAsociado.toString();
 		return this.numReserva+"  \t\t\t  "+this.inicioDia+"/"+this.inicioMes+"/"+this.inicioAno+"\t - \t"+this.finDia+"/"+this.finMes+"/"+this.finAno+
-			"  \t\t\t  "+servicio;
+			"  \t\t\t  "+servicio+"  \t\t\t  "+this.precio+" €";
 	}
 	
 	@Override
