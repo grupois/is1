@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
@@ -18,8 +17,6 @@ import org.hotel.cliente.Cliente;
 import org.hotel.cliente.ControladorListaClientes;
 import org.hotel.cliente.GestorClientes;
 import org.hotel.cliente.VistaListaClientes;
-import java.awt.FlowLayout;
-import javax.swing.JList;
 
 public class HotelGUI extends JFrame {
 

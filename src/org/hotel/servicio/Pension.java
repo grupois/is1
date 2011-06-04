@@ -33,4 +33,31 @@ public class Pension implements Servicio, ServicioGenerico {
 		modPrecio=mod;
 	}
 
+	@Override
+	public Servicio reservar(int diaInic, int mesInic, int anoInic, int diaFin,
+			int mesFin, int anoFin) {
+		return new Pension();
+	}
+
+	@Override
+	public boolean cancelar(Servicio pens,int diaInic, int mesInic, int anoInic, int diaFin,
+			int mesFin, int anoFin) {
+		return this.cancelar(diaInic, mesInic, anoInic, diaFin, mesFin, anoFin);
+	}
+
+	@Override
+	public boolean cancelar(int diaInic, int mesInic, int anoInic, int diaFin,
+			int mesFin, int anoFin) {
+		return true;
+	}
+
+	@Override
+	public double getPrecioBase() {
+		return precioBase;
+	}
+
+	@Override
+	public String toString() {
+		return this.getServicio();
+	}
 }
