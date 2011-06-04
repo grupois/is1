@@ -73,7 +73,7 @@ public class VistaReserva extends JFrame {
 		JLabel lblFechaInicioReserva = new JLabel("Fecha Inicio Reserva");
 		lblFechaInicioReserva.setBounds(12, 12, 153, 15);
 		contentPane.add(lblFechaInicioReserva);
-		
+
 		String[] dias=new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18",
 				"19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		String[] meses=new String[] {"Ene.", "Feb.", "Mar.", "Abr.", "May.", "Jun.", "Jul.", "Ago.", "Sep.", "Oct.", "Nov.", "Dic."};
@@ -119,7 +119,7 @@ public class VistaReserva extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(12, 91, 410, 114);
 		contentPane.add(scrollPane);
-		
+
 		final JLabel lblNewLabel_1 = new JLabel("0 €");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel_1.setBounds(347, 66, 70, 15);
@@ -128,7 +128,7 @@ public class VistaReserva extends JFrame {
 		final VistaListaServicios list = new VistaListaServicios();
 		list.displayReservas(GestorServicios.getInstance().getArrayServicios());
 		scrollPane.setColumnHeaderView(list);
-		
+
 		list.addMouseListener(new MouseListener() {
 
 			@Override
@@ -152,10 +152,9 @@ public class VistaReserva extends JFrame {
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (comboBox_2.getSelectedIndex()>comboBox_5.getSelectedIndex()||comboBox_1.getSelectedIndex()>comboBox_4.getSelectedIndex()
-						||comboBox.getSelectedIndex()>=comboBox_3.getSelectedIndex()) {
-					JOptionPane.showMessageDialog(yo, "La fecha final debe ser superior a la inicial", "Error en las fechas", JOptionPane.ERROR_MESSAGE);
-				}else{
+				if ((comboBox_2.getSelectedIndex()<comboBox_5.getSelectedIndex())||(comboBox_2.getSelectedIndex()<=comboBox_5.getSelectedIndex()&&
+						comboBox_1.getSelectedIndex()<comboBox_4.getSelectedIndex())||(comboBox_2.getSelectedIndex()<=comboBox_5.getSelectedIndex()&&
+								comboBox_1.getSelectedIndex()<=comboBox_4.getSelectedIndex()&&comboBox.getSelectedIndex()<comboBox_3.getSelectedIndex())) {
 					contRes.aceptarReserva(comboBox.getSelectedIndex()+1, comboBox_1.getSelectedIndex()+1,
 							comboBox_2.getSelectedIndex()+2011,comboBox_3.getSelectedIndex()+1,
 							comboBox_4.getSelectedIndex()+1, comboBox_5.getSelectedIndex()+2011,
@@ -164,6 +163,8 @@ public class VistaReserva extends JFrame {
 									comboBox_3.getSelectedIndex()+1, comboBox_4.getSelectedIndex()+1, comboBox_5.getSelectedIndex()+2011));
 					contListRes.actualizarClientes(vistaListRes);
 					yo.setVisible(false);
+				}else{
+					JOptionPane.showMessageDialog(yo, "La fecha final debe ser superior a la inicial", "Error en las fechas", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

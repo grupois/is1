@@ -22,10 +22,10 @@ public class Fechas {
 		return (ano>=anoInic&&ano<=anoFin&&mes>=mesInic&&mes<=mesFin&&dia>=diaInic&&dia<=diaFin);
 	}
 	public boolean posterior(int dia,int mes,int ano){
-		return ano>=anoFin&&mes>=mesFin&&dia>diaFin;
+		return ano>anoFin||(ano>=anoFin&&mes>mesInic)||(ano>=anoFin&&mes>=mesFin&&dia>diaFin);
 	}
 	public boolean anterior(int dia,int mes,int ano){
-		return ano<=anoInic&&mes<=mesInic&&dia<diaInic;
+		return ano<anoInic||(ano<=anoInic&&mes<mesInic)||(ano<=anoInic&&mes<=mesInic&&dia<diaInic);
 	}
 
 	@Override
